@@ -62,6 +62,49 @@ function getRegisteredToken() {
     });
 }
 
+function resetUI() {
+    clearMessages();
+    showToken('loading new token...');
+    getRegisteredToken();
+}
+
+// [START refresh_token]
+// Callback fired if Instance ID token is updated.
+messaging.onTokenRefresh(() => {
+    messaging.getToken().then((refreshedToken) => {
+        console.log('Token refreshed.');
+        // Indicate that the new Instance ID token has not yet been sent to the
+        // app server.
+        setTokenSentToServer(false);
+        // Send Instance ID token to app server.
+        sendTokenToServer(refreshedToken);
+        // [START_EXCLUDE]
+        // Display new Instance ID token and clear UI of all previous messages.
+        resetUI();
+        // [END_EXCLUDE]
+    }).catch((err) => {
+        console.log('Unable to retrieve refreshed token ', err);
+        showToken('Unable to retrieve refreshed token ', err);
+    });
+});
+// [END refresh_token]
+
+
+
+// [START receive_message]
+// Handle incoming messages. Called when:
+// - a message is received while the app has focus
+// - the user clicks on an app notification created by a service worker
+//   `messaging.setBackgroundMessageHandler` handler.
+messaging.onMessage((payload) => {
+    console.log('Message received. ', payload);
+    // [START_EXCLUDE]
+    // Update the UI to include the received message.
+    appendMessage(payload);
+    // [END_EXCLUDE]
+});
+// [END receive_message]
+
 // Send the Instance ID token your application server, so that it can:
 // - send messages back to this app
 // - subscribe/unsubscribe the token from topics
@@ -171,9 +214,3 @@ function showToken(currentToken) {
     const tokenElement = document.querySelector('#token');
     tokenElement.textContent = currentToken;
 }
-
-function resetUI() {
-    clearMessages();
-    showToken('loading...');
-}
-resetUI();
