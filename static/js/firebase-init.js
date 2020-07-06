@@ -112,12 +112,14 @@ function sendTokenToServer(currentToken) {
     if (!isTokenSentToServer()) {
         console.log('Sending token to server...');
         // TODO(developer): Send the current token to your server.
+        // saving token in backend
+        saveTokenToServer(currentToken);
+        // setting token sent in frontend
         setTokenSentToServer(true);
     } else {
         console.log('Token already sent to server so won\'t send it again ' +
             'unless it changes');
     }
-
 }
 
 function isTokenSentToServer() {

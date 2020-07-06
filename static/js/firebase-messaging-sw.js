@@ -1,6 +1,5 @@
 importScripts('https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/7.15.5/firebase-messaging.js');
-importScripts('https://www.gstatic.com/firebaseinit.js');
 
 
 // [START initialize_firebase_in_sw]
