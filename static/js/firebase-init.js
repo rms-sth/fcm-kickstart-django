@@ -99,11 +99,42 @@ messaging.onTokenRefresh(() => {
 messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
     // [START_EXCLUDE]
+    let title = payload.data.title;
+    let body = payload.data.body;
+    let icon = payload.data.icon;
+
+    const options = {
+        title: title,
+        body: body,
+        icon: icon,
+        image: icon,
+        data: {
+            time: new Date(Date.now()).toString(),
+            click_action: payload.data.click_action
+        }
+    };
+
+    var myNotification = new Notification(title, options)
+    // open notification in new window
+    myNotification.addEventListener("click", event => {
+        let action_click = event.target.data.click_action;
+        event.target.close();
+        event.waitUntil(window.open(action_click));
+    });
     // Update the UI to include the received message.
     appendMessage(payload);
     // [END_EXCLUDE]
 });
 // [END receive_message]
+
+function myFunction(options) {
+    console.log(options, '2222222222222')
+    console.log(options.data.click_action, '2222222222222')
+    let action_click = options.data.click_action;
+    // event.notification.close();
+    // event.waitUntil(clients.openWindow(action_click));
+    clients.openWindow(action_click)
+}
 
 
 // Send the Instance ID token your application server, so that it can:

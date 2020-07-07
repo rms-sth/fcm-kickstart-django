@@ -37,9 +37,20 @@ messaging.setBackgroundMessageHandler(function (payload) {
     const options = {
         title: title,
         body: body,
-        icon: '../img/firebase-logo.png'
+        icon: icon,
+        data: {
+            time: new Date(Date.now()).toString(),
+            click_action: payload.data.click_action
+        }
     };
 
     return self.registration.showNotification(title, options);
 });
 // [END background_handler]
+
+
+self.addEventListener('notificationclick', function (event) {
+    let action_click = event.notification.data.click_action;
+    event.notification.close();
+    event.waitUntil(clients.openWindow(action_click));
+});
