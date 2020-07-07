@@ -25,7 +25,7 @@ SECRET_KEY = 'zn_$^=(os&3v=vio5v!$ducq5qi-o3)3y66e8mk-&+%t8l)q97'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

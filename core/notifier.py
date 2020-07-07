@@ -1,4 +1,6 @@
 import json
+import os
+
 import requests
 
 SERVER_KEY = 'AAAA0DWbfOI:APA91bErDiwUoOMbvrQ3jOEAlTOj3_o9Zt6d4GBS8N_z17ZgVeyKiSOnnMPTx4RfWa9k5gQRdXcL6LAUOzwb-NbCIKVMyZS_dOPX5zIAn44aw9XreTb0s-AUH1Nr0wkSJK9jp3pwv_6y'
@@ -12,14 +14,18 @@ def send_notification():
         'Content-type': "application/json",
     }
 
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    logo = os.path.join(BASE_DIR, '/static/img/firebase-logo.png')
+
     msg = {
         "title": "Portugal vs. Denmark",
         "body": "5 to 1",
-        "icon": "firebase-logo.png",
+        "icon": logo,
         "click_action": "http://localhost:8000",
     }
 
-    client_token = 'eEv7nnjyky_D0nMTiF2E4l:APA91bGl51ePfPqyJAE1i_fqG5TMAyv7pe5AbnEUtVw2uGEVMaC8QlUWacP4WSadPBreY9QMfUYePOczEL-XXXKQWgniyyK8DZU1Qxqz29AQ_0D82u0-hD_UGKtpsSlTmshTwFzCJ7tz'
+    client_token = 'd4-IK3iHzN8I6o8M-4EgsU:APA91bFLOXQemuVSOHB29G-FCmJjJk106nPhwIsx7bR8lQByDiiUhuBfB4SlBqCA8ymBhcXf0mz7qs-9_XA5OMvdDSP_144DeauDD9nZlHHQb9g2DTqcC6X1QKDtIgj6hrOyneCw4REs'
 
     payload = {
         'notification': msg,

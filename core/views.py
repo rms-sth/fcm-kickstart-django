@@ -44,10 +44,21 @@ class SendNotificationView(View):
             "click_action": "http://localhost:8000",
         }
         client_token = client_token
+
+        webpush = {
+            "fcm_options": {
+                "link": "http://localhost:8000"
+            }
+        }
+
         payload = {
-            'notification': msg,
+            'data': msg,
+            'webpush': webpush,
             'to': client_token,
         }
+
+        print(payload)
+
         payload = json.dumps(payload)
         response = requests.request("POST", url, headers=headers, data=payload)
         print(response.text.encode('utf8'))

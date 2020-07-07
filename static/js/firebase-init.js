@@ -105,6 +105,7 @@ messaging.onMessage((payload) => {
 });
 // [END receive_message]
 
+
 // Send the Instance ID token your application server, so that it can:
 // - send messages back to this app
 // - subscribe/unsubscribe the token from topics
@@ -113,7 +114,7 @@ function sendTokenToServer(currentToken) {
         console.log('Sending token to server...');
         // TODO(developer): Send the current token to your server.
         // saving token in backend
-        saveTokenToServer(currentToken);
+        saveTokenToServer(currentToken); // look index.html for more info..
         // setting token sent in frontend
         setTokenSentToServer(true);
     } else {
