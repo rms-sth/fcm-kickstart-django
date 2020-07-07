@@ -24,5 +24,8 @@ app_name = 'token'
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
-    path('browser-token-create/', views.BrowserTokenCreateView.as_view(), name='browser_token_create'),
+    path('browser-token-create/', views.BrowserTokenCreateView.as_view(),
+         name='browser_token_create'),
+    path('send-notification/', views.SendNotificationView.as_view(),
+         name='send_notification'),
 ]
